@@ -5,13 +5,57 @@ b)
 rideLine.push("Mary");
 
 c)
-function findName(arr, name){
-  for (i = 0; i < arr.length; i++)
-    if (arr[i] == name) {
-      return i;
-    }
+function isInLine(arr, name) {
+  let placeInLine = arr.indexOf(name);
+    if (placeInLine >= 0) {
+    return placeInLine
+    } 
 }
 
 d)
+function isInLine(arr, name) {
+  let placeInLine = arr.indexOf(name) + 1;
+    if (placeInLine > 0) {
+    return placeInLine
+    } else {
+    return "This person is not in line"
+   }
+}
 
-// problem: When I use an else statement, they both show up as "not found"
+e)
+function cutInLine(arr, placeInLine, name){
+  var newLine = arr.splice(placeInLine, 0, name)
+  return newLine;
+}
+
+f)
+function leaveLine(arr, placeInLine){
+  var leftLine = arr.splice(placeInLine, 1)
+  return arr;
+}
+
+2/3) Another example you could model with a data structure is if you owned a snowboard rental shop: You would need a 
+system to track which boards you had and whether they were rented or available, using JS objects like this:
+
+function Snowboard(number, size, condition) {  // Create new snowboards to add to the store inventory
+  this.number = number;
+  this.size = size;
+  this.condition = condition;
+}
+
+var boardOne = new Snowboard(1, "152 cm", "good");
+var boardTwo = new Snowboard(2, "152 cm", "fair");
+var boardThree = new Snowboard(3, "156 cm", "good");
+var boardFour = new Snowboard(4, "156 cm", "good");
+
+var availableBoards = [];                     // Use arrays to track which boards are available or rented out
+var rentedBoards = [];
+
+function rentBoard(arr, board){               // Functions to add boards to list of rented, available boards
+  arr.push(board);
+}
+
+rentBoard(rentedBoards, boardOne);
+
+// With this system we could add attributes to each board to monitor its condition, create and delete boards, 
+track whether they were rented or in the store etc...
