@@ -1,0 +1,111 @@
+1) What is the main difference between a stack and a queue?
+
+A) The main difference is that stacks use use Last In, First Out structure to store data elements - this means only one end is open
+for pushing and popping data, you can add things to the end or remove them from the same end. Queues use First In, First Out
+which means that you can add things to one end but remove them from the other end
+
+2) What are the similarities between stacks and queues?
+
+A) They both are data structures where you can only access one item at a time, and only on the end - you can't use indexes
+to pick out items from the middle of the stack or queue
+
+3) Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. 
+Which data structure would you use for each option and why?
+
+A) I would use a stack for both options as that will allow me to remove the most recently added word with a pop for UNDO,
+or retype the most recently deleted word using a push for REDO
+
+1) Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+A) This one matches the pseudocode in the stack example. We will create a new stack, push all characters from the string to the stack,
+then pop all the characters from the stack into a new string:
+
+FUNCTION REVERSE(original)
+  INIT a new stack
+  FOR each character in original
+    CALL stack.push WITH character
+  END FOR
+  INIT reversed to empty string
+  WHILE stack is not empty
+    CALL stack.pop RETURNING character
+    APPEND character to reversed
+  END WHILE
+  RETURN reversed
+END FUNCTION
+
+Implemented in JS:
+
+function reverse(original) {
+  var newStack = [];
+  for (var i = 0; i < original.length; i++) {
+    newStack.push(original[i]);
+  }
+  var reverseString = '';
+  while (newStack.length > 0) {
+    reverseString += newStack.pop();
+  }
+  return reverseString;
+}
+
+console.log(reverse('Bloc!'));
+// returns '!colB'
+
+2) Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure.
+Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+To delete an item, take all of the elements in the queue one at a time and put them at the end of the queue, 
+except for the last one which should be removed and returned.
+
+helper FUNCTION dequeueAndEnqueue                   // Run this in a loop to take each item from the front to the end of the line
+  DEQUEUE item from end of list
+  ENQUEUE that item at front of list
+RETURN list with element moved from end to beginning
+
+FUNCTION stackPop(queue)
+  LOOP FOR (length of queue minus one)              //we want to do this until we reach the element we want to remove, the last one in
+    RUN FUNCTION dequeueAndEnqueue                  // Remove each item from the front of the line and put at the back of the line
+  END LOOP
+  RETURN queue.DEQUEUE                              // Remove the item that is now in the front position (was originally at the back, mirroring the functionality of a stack pop)
+
+var queue = [];                            // Making the variable for the queue
+queue.push(1, 2, 3, 4);                    // adding elements to the queue
+console.log(queue);
+
+function shiftAndPush(arr) {               // This is our 'dequeueAndEnqueue' from above
+var shifted = arr.shift();
+arr.push(shifted);
+return arr;
+}
+
+function stackPop(arr) {                           //This is our stackPop from above
+  for (let i = 0; i < arr.length - 1; i ++) {
+    shiftAndPush(arr);
+  } return arr.shift();
+}
+
+stackPop(queue);
+
+
+
+1) Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
+class Queue {
+  constructor() {
+    this.elements = []
+  }
+  
+  enqueue(e) {
+    this.elements.push(e);
+  }
+  
+  dequeue() {
+    return this.elements.shift();
+  }
+}
+
+ 
+
+
+
+
+
+
+
