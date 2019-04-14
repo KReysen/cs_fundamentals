@@ -102,7 +102,13 @@ LinkedList.prototype.removeDuplicates = function() {
   }
 };
 
-
+Test:
+var test2 = new LinkedList();
+var exercise2 = ['a', 'c', 'd', 'd', 'a'];     // create list for test case
+exercise2.forEach(el => test2.push(el));
+console.log(test2);                             // returns a - c - d- d- a
+test2.removeDuplicates();
+console.log(test2);                             // returns a - c - d
 
 3) Given an unsorted singly linked list, reverse it.
 Example
@@ -123,3 +129,11 @@ LinkedList.prototype.reverseList = function () {
   }
   this.head = previousNode;
 }
+
+Test:
+var test3 = new LinkedList();
+var exercise3 = ['a','b','c','d'];           // create new list and add data for test
+exercise3.forEach(el => test3.push(el));
+console.log(test3);                          // returns a b c d
+test3.reverseList();
+console.log(test3);                          // returns d c b a
