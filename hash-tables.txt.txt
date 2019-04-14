@@ -1,0 +1,209 @@
+1 What is a hash table?
+A- A data structure that stores data in key-value pairs that are accessible by looking up each
+value's unique key. These key-value pairs are then sorted into a specific array location by a 
+hashing algorithm.
+
+2 What is hashing?
+A- The use of a function to convert a key into a number known as a hash code, which is then used 
+to figure out where to place the key in the array. It is necessary because sometimes the keys themselves
+are large numbers which aren't conducive to being used as the index directly
+
+3 How does a hash table store data?
+A- Hash tables store data with each value at a numerical index, like an array. The difference is that 
+instead of adding values to indexes in order/sequentially, hash tables decide where to put the data 
+based on a hashing function that generates a hash code which will then determine the storage location
+
+4 How are hash tables and objects different?
+A - Hash tables have one key for each storage location, which can then hold many values (but not 
+more keys) so they are used to contain one type of data. Objects are collections or bundles
+of different types of data, so they could have a collection of keys and values within one object.
+
+5 Determine whether you would use a hash table or an object to store each of the following pieces of data:
+  A list of pets and their unique names. HASH TABLE
+  The name, age, and the birthday of your best friend.  OBJECT
+  The name and location of every company in a given city.  HASH TABLE
+  All of the books checked out from a library by a particular individual.  HASH TABLE
+  The primary and secondary phone numbers for a contact.  OBJECT
+
+1. Create a hash table that allows a sales associate to enter a customer's name, address,
+and phone number into the system and look up customers using their phone numbers.
+
+class HashTable{
+  
+  constructor(size = 5){
+    this.buckets =  new Array(size)
+    this.size = size
+  }
+  
+  
+    hash(phone){
+       return phone.toString().length % this.size;
+   }
+  
+  
+  set(phone, name, address){
+    
+    let index = this.hash(phone);
+    
+    if(!this.buckets[index]){
+      this.buckets[index] = [];
+    }
+    
+    this.buckets[index].push([phone, name, address])
+    
+    return index
+    
+  }
+  
+  get(phone){
+    
+    let index = this.hash(phone);
+  
+     if(!this.buckets[index])return null
+     
+        for(let bucket of this.buckets[index]){
+             // phone number
+          if(bucket [0] === phone){
+             //name
+            return bucket
+           }
+        }
+        
+      
+  }
+  
+}
+
+//Tests
+
+var phoneList = new HashTable();
+phoneList.set(5558675309, 'Jenny', '416 Maple Dr');           // Add customers to list
+phoneList.set(7445734812, 'Thomas', '12 Oak Ln');
+phoneList.set(8967622092, 'Andrew', '587 Elm Ave');
+console.log(phoneList.get(8967622092));                       // Returns  8967622092, "Andrew", "587 Elm Ave"
+
+
+2. Create a hash table that allows a store owner to track their store's inventory and quantity.
+
+class HashTable{
+  
+  constructor(size = 8){
+    this.buckets =  new Array(size)
+    this.size = size
+  }
+  
+  
+    hash(string, max) {
+      var hash= 0
+  for(var i = 0; i < string.length; i++){
+    hash += string.charCodeAt(i)
+  }
+  return hash % max;
+    }
+  
+  
+  set(item, quantity){
+    let index = this.hash(item, this.size);
+    
+    if(!this.buckets[index]){
+      this.buckets[index] = [
+        [item, quantity]
+        ];
+    }
+    return index
+  }
+  
+  get(item){
+    
+    let index = this.hash(item, this.size);
+  
+     if(!this.buckets[index])return "Item not found in inventory"
+     
+        for(let bucket of this.buckets[index]){
+          if(bucket [0] === item){
+            return bucket [0] + 's in stock: ' + bucket[1]
+           } else {
+             return "None in stock";
+           }
+        }
+     }
+}
+
+// Tests 
+let question2 = new HashTable();
+
+question2.set('Baseball', 8);
+question2.set('Basketball', 4);
+question2.set('Football', 20);
+question2.set('Golf ball', 5);
+question2.set('Soccer ball', 9);
+
+console.log(question2);
+console.log(question2.get('Baseball'));
+console.log(question2.get('Frisbee'));
+
+3. Create a hash table that allows digital copies of newspapers to be entered and searched 
+by publisher and publication date.
+
+
+
+
+class HashTable{
+  
+  constructor(size = 15){
+    this.buckets =  new Array(size)
+    this.size = size
+  }
+  
+  
+    hash(string, max) {
+      var hash= 0
+  for(var i = 0; i < string.length; i++){
+    hash += string.charCodeAt(i)
+  }
+  return hash % max;
+    }
+  
+  
+  set(publisher, pubDate, article){
+    let key = publisher + pubDate;
+    let index = this.hash(key, this.size);
+    
+    if(!this.buckets[index]){
+      this.buckets[index] = [
+        [publisher, pubDate, article]
+        ];
+    }
+    return index
+  }
+  
+  search(publisher, pubDate){
+    let key = publisher + pubDate;
+    let index = this.hash(key, this.size);
+  
+     if(!this.buckets[index])return "No papers found"
+     
+        for(let bucket of this.buckets[index]){
+          if(bucket [0] === publisher){
+            return "Publisher: "+ bucket [0] + " Date: " + bucket [1] + " Article title: " + bucket[2]
+           } 
+        }
+     }
+}
+
+// Tests 
+
+let question3 = new HashTable();
+question3.set('New York Times', 'July 12', 'New bakery opens');
+question3.set('New York Times', 'August 27', 'Free burrito Day!');
+question3.set('LA Times', 'August 9', 'Record traffic');
+question3.set('LA Times', 'July 5', 'Summer fun');
+question3.set('New York Times', 'April 7', 'Spring is here');
+
+
+console.log(question3);
+console.log(question3.search('New York Times', 'April 7'));
+console.log(question3.search('LA Times', 'March 2'));
+
+
+ 
