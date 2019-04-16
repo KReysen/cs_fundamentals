@@ -30,20 +30,24 @@ and phone number into the system and look up customers using their phone numbers
 
 class HashTable{
   
-  constructor(size = 5){
+  constructor(size = 500){
     this.buckets =  new Array(size)
     this.size = size
   }
   
   
-    hash(phone){
-       return phone.toString().length % this.size;
-   }
+    hash(string, max) {
+      var hash= 0
+  for(var i = 0; i < string.length; i++){
+    hash += string.charCodeAt(i)
+  }
+  return hash % max;
+    }
   
   
   set(phone, name, address){
     
-    let index = this.hash(phone);
+    let index = this.hash(phone, this.size);
     
     if(!this.buckets[index]){
       this.buckets[index] = [];
@@ -57,7 +61,7 @@ class HashTable{
   
   get(phone){
     
-    let index = this.hash(phone);
+    let index = this.hash(phone, this.size);
   
      if(!this.buckets[index])return null
      
@@ -77,17 +81,20 @@ class HashTable{
 //Tests
 
 var phoneList = new HashTable();
+phoneList.set(3486256490, 'Anne', '333 Evergreen St')
 phoneList.set(5558675309, 'Jenny', '416 Maple Dr');           // Add customers to list
 phoneList.set(7445734812, 'Thomas', '12 Oak Ln');
 phoneList.set(8967622092, 'Andrew', '587 Elm Ave');
-console.log(phoneList.get(8967622092));                       // Returns  8967622092, "Andrew", "587 Elm Ave"
+console.log(phoneList);                     
+console.log(phoneList.get(7445734812));
+console.log(phoneList.get(3486256490));
 
 
 2. Create a hash table that allows a store owner to track their store's inventory and quantity.
 
 class HashTable{
   
-  constructor(size = 8){
+  constructor(size = 500){
     this.buckets =  new Array(size)
     this.size = size
   }
@@ -150,7 +157,7 @@ by publisher and publication date.
 
 class HashTable{
   
-  constructor(size = 15){
+  constructor(size = 500){
     this.buckets =  new Array(size)
     this.size = size
   }
