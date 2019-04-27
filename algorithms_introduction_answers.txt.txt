@@ -1,0 +1,84 @@
+1. Using proper pseudo-code, describe the following primitive algorithms:
+
+a- Making coffee;
+FUNCTION MakeCoffee
+  Get coffee
+  Get coffee press
+  Get teakettle
+  Get drinking water
+  Add 2tbs coffee to coffee press
+  Heat drinking water
+    WHILE drinking water is less than boiling,
+      Continue to heat drinking water
+    ENDWHILE
+  Add heated drinking water to coffee press
+    Set timer for 5 minutes
+      IF timer has time remaining,
+        leave coffee press
+      ELSE push down coffee press
+      ENDIF
+    Serve coffee
+END FUNCTION
+
+b- Washing dishes;
+
+FUNCTION WashDishes
+  WHILE Dishwasher is not full
+    FOR each dish
+      IF dish has stuck-on food
+        hand scrub with sponge
+        rinse with sink water
+        ADD to dishwasher
+      ELSE add to dishwasher
+      ENDIF
+   ENDWHILE
+   Run dishwasher
+END FUNCTION
+
+c- A choice of your own.
+
+FUNCTION FillGas
+  Open fuel hatch
+  Unscrew gas cap
+  Place Fuel hose into gas tank
+    WHILE fuel amount < fuel capacity
+      Squeeze fuel hose trigger
+    ENDWHILE
+  Return fuel hose
+  Screw gas cap in
+  Close fuel hatch
+  Pay for gas
+
+2. As with the knot algorithm, there may be more than one way to solve the problem. 
+It is essential to try to pick the best algorithm for a situation. Name three companies
+who created an algorithm that made them successful, e.g., Google's search algorithm. 
+It doesn't need to be a tech example (such as a recipe or manufacturing a product). 
+Google's algorithm produces more relevant results than other search engines; what about 
+each of your cases make them stand out?
+
+McDonalds - credited with inventing the fast food concept, based their restaurants on being as fast,
+cheap, and consistent as possible. They were first to apply algorithms to all their cooking and
+service processes. Having strict prodedure instructions for every cooking process, 
+identical layout in all kitchens, and the use of automation whenever possible to guarantee speed
+and consistency allowed them to dominate the industry because it created brand loyalty with customers,
+as they loved McDonalds in general rather than 1 specific burger stand  
+
+In the NFL, the West Coast offense applies algorithms to football. In this system, plays have a 
+decision tree that the QB goes through once a play starts to run. They are structured so that 
+QB checks his options in a prescribed order on each play, rather than the old offenses that were 
+designed around just 1 option or plan. This offensive strategy has had a huge impact on the NFL
+today since its debut with the 49ers, who won 3 Super Bowls with it.
+
+Ford - in a effort to increase the speed and lower costs of production in the factory,
+Ford is the first automaker to use a moving assembly line to build an entire car. They
+broke down the process of assembly into 84 discrete steps to be performed by people
+who specialized in just their individual step of the process. The innovation allowed Ford
+to be the company to bring automobiles to the masses for the first time.
+
+
+3. Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+An efficient algorithm would probably have the fewest steps and decisions possible, so it is faster to execute
+This would mean it takes less time to execute and ties up less resources. An algorithm that is 
+super thorough might take a long time or a lot of memory, and be less useful when the application
+is scaled up
