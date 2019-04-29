@@ -1,0 +1,38 @@
+1 What is time complexity and what is its relation to algorithms?
+A- Time complexity is the way we calculate an algorithm's efficiency. It is a function
+that determines how fast the run time of the program grows as we add more input to the program
+
+2 What is runtime?
+A - Runtime is the time duration of an algorithm (how long it takes to run) but is often
+used synonymously with time complexity 
+
+3 How is the runtime of an algorithm calculated?
+A- To calculate the runtime, we add up how many instructions the algorithm has to execute
+depending on the size of its input, then simplify the expression to the largest term and
+drop any constants
+
+4 Name the six types of algorithm growth rates we saw in this checkpoint and list them in order 
+of most efficient to least efficient. Now Google another algorithmic growth rate not 
+covered and place it in the correct spot in your list.
+a - Constant Growth Rate  O(1) (as input increases, runtime stays the same)
+b - Logarithmic Growth Rate O(log n) (runtime increases by 1 unit each time input doubles, 
+    commonly seen in binary searches)
+c - Linear Growth Rate O(n)  (runtime and input size directly proportional, like in for loop)
+d - Log-linear Growth Rate O(n log n) (heap and merge sort)
+e - Quadratic Growth Rate O(n^2)  (for loop within for loop)
+f - Cubic Growth Rate )(n^3)
+g - Exponential Growth Rate O(2^n) (growth doubles with each increase in input - recursive functions)
+
+5 Choose one of the algorithmic growth rates from the last question and make a comparison 
+to a real-life situation.
+A - When humans are perceiving the intensity of a sound, our perception of its intensity 
+increases logarithmically so we measure sound intensity in decibels. 
+
+6 O(n) Linear growth rate
+
+7 O(n^2) Quadratic growth rate
+
+8  O(2^n) Exponential growth rate
+
+9 Out of the code snippets you just saw, which is the most time efficient?
+A - the Function linearSearch() example
