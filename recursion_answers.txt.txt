@@ -1,0 +1,76 @@
+1 Define and compare recursion and iteration.
+A- Recursion is using a function that calls itself repeatedly until reaching a base case you specify.
+For recursion, the function being called is the one making the call, so the entire function runs
+over and over. In Iteration, one function call triggers a loop that will execute until a specified
+condition is met - there is just a single function call, and it cannot call itself. Recursive code is 
+shorter and cleaner, but consumes more resources due to repeated method calls. Iterative code can be
+longer and more complicated to implement as you need to define more variables to store info while the 
+loop is running, but because you aren't making as many function calls, it takes less memory space/
+processor time.
+
+
+2 Name five algorithms that are commonly implemented by recursion.
+A- Factorial, binary search, quicksort, fibonacci sequence, depth-first search and breadth-first search
+
+3 When should you use recursion, and when should you avoid recursion? Give examples for each.
+A- Recursion is ideal when you need to use the sub-results to reach your eventual solution, like
+when finding a factorial. Iteration is better when you need to run over a data set to find a single
+value - it avoids unnecessary resource use by using a single call and not saving sub-results
+
+4 Compare the recursive and iterative solutions to the three algorithms from the checkpoint 
+(factorial, maximum, and fibonacci). What is similar, and what is different?
+A- They each peform similar operations, but they store/log the results of the operations differently.
+In the recursive solutions, there seems to be more going on 'under the hood' as the result of each
+function call will need to be stored and referenced by the others. The iterative solutions just store
+one result and keep updating that one result in each step. This means the code for recursive fibonacci
+and factorial looks cleaner and simpler, because this method is ideal for these problems. The max 
+number, meanwhile, is much uglier in its recursive solution as this is a convoluted way to look 
+through a list of numbers. For this problem, the iterative solution is much cleaner.
+
+
+5 Given a multi-dimensional collection (such as an array) where the number of dimensions is 
+unknown, write a recursive algorithm to count the number of items in the entire collection.
+
+var longArray = [[2, 4,], [2, 1, 5], [[5, 6, 7], [1, 2, 3]], [5, 2, 1]];
+var shortArray = [[3], [[3,4], [4, 5]], [7]];
+
+function countElements(arr) {
+  if(arr.length){
+    if(typeof arr[0] === "object"){
+      return countElements(arr[0]) +
+      countElements(arr.slice(1));
+    } else {
+      return 1 + countElements(arr.slice(1));
+    }
+  } else {
+    return 0;
+  }
+}
+
+console.log(countElements(longArray));  // returns 14
+console.log(countElements(shortArray)); // returns 6
+
+6 A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar).
+ Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+
+function checkPalindrome(str) {
+  var stringLength = str.length;
+  if (stringLength <= 1) {
+    return true;
+  }
+  if(str[0] === str[stringLength - 1]) {
+    return checkPalindrome(str.slice(1, stringLength - 1));
+  }
+  return false;
+}
+
+      
+console.log(checkPalindrome('racecar'));  // returns true
+console.log(checkPalindrome('bus'));      // returns false
+console.log(checkPalindrome('kayak'));    // returns true
+
+7 Google Easter Egg: Google the term "recursion". Google will prompt you with 
+"Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
+A- recursion happens when something is defined in terms of itself. In programming, this means
+a function calling itself, so if you click "did you mean recursion" it calls the same function (a 
+google search for recursion) over again

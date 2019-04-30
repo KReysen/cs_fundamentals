@@ -36,3 +36,4 @@ increases logarithmically so we measure sound intensity in decibels.
 
 9 Out of the code snippets you just saw, which is the most time efficient?
 A - the Function linearSearch() example
+
