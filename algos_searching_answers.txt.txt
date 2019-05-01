@@ -29,12 +29,14 @@ need to.
 Programming Assignment:
 1 You and a friend have set a wager to see who can find the word "Albatross" in the 
 dictionary the fastest. Write a program to allow you to win the bet.
-
 function findAlbatross(dictionary, target){
   let left = 0;
   let right = dictionary.length - 1;
+  if(target < dictionary[left] || target > dictionary[right]){
+    return false
+  }
   while (left <= right) {
-    const mid = left + Math.floor((right - left) / 2);
+    let mid = Math.floor((left + right) / 2);
     if (dictionary[mid] === target) {
       return mid;
     }
@@ -44,8 +46,16 @@ function findAlbatross(dictionary, target){
       right = mid - 1;
     }
   }
-  return -1;
+  return "not found in dictionary";
 }
+
+var dictionaryOne = ["Aardvark", "Albatross", "Crocodile", "Dingo", "Zebra"];
+
+console.log(findAlbatross(dictionaryOne, "Albatross"));  //returns 1
+console.log(findAlbatross(dictionaryOne, "Crocodile"))  // returns 2 
+console.log(findAlbatross(dictionaryOne, "Zebra"));     // returns 4
+console.log(findAlbatross(dictionaryOne, "Horse"));     // returns 'not found in dictionary'
+
 
 2 You work at a pet store, and a child has asked you to net the only white-spotted goldfish 
 from the fish tank. Write a program that will help you net the right fish.
