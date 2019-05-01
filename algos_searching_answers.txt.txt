@@ -1,0 +1,68 @@
+1 What is a real-life scenario that uses linear search?
+A - Scrolling through a list of Netflix episodes to see if they have new ones
+
+2 What is a real-life scenario that uses binary search?
+A - When looking for someone in a yearbook, you can open to the middle and see where you are
+in the alphabet - based on the name, you'll then know to look at earlier pages or later 
+pages to find the name.
+
+3 Given the alphabetically sorted collection in this checkpoint, how many iterations 
+would it take to find the value G using linear search?
+A - 7 iterations
+
+4 Given the alphabetically sorted collection in this checkpoint, how many iterations
+ would it take to find the value G using binary search?
+A- 3 iterations
+
+5 Given an unsorted collection of a million items, which algorithm would you choose 
+between linear search and binary search? Explain your reasoning.
+A - Linear search would be ideal because binary search doesn't work with unsorted collections.
+The lack of sorting means you couldn't get any closer to the desired outcome by starting in the 
+middle than you would if you just started at the beginning and went through in order 
+
+6 Given a sorted collection of a million items, which algorithm would you choose 
+between linear search and binary search? Explain your reasoning.
+A - Binary search is the better option here as it allows you to discard data where you know
+the answer ISN'T located, so you'll save time and resources by not searching where you don't
+need to.
+
+Programming Assignment:
+1 You and a friend have set a wager to see who can find the word "Albatross" in the 
+dictionary the fastest. Write a program to allow you to win the bet.
+
+function findAlbatross(dictionary, target){
+  let left = 0;
+  let right = dictionary.length - 1;
+  while (left <= right) {
+    const mid = left + Math.floor((right - left) / 2);
+    if (dictionary[mid] === target) {
+      return mid;
+    }
+    if (dictionary[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+  return -1;
+}
+
+2 You work at a pet store, and a child has asked you to net the only white-spotted goldfish 
+from the fish tank. Write a program that will help you net the right fish.
+
+function catchFish (fishTank, goalFish) {
+  var result = null, value;
+  for(var i = 0; i < fishTank.length; i++){
+    value = fishTank[i];
+    if(value === goalFish) {
+      result = i;
+      break;
+    }
+  }
+  return result;
+}
+
+var newFishTank = ['red spot', 'blue spot', 'gold spot', 'silver spot', 'white spot', 'black spot'];
+
+console.log(catchFish(newFishTank, 'white spot'));
+console.log(catchFish(newFishTank, 'red spot'));
