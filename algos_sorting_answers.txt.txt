@@ -1,0 +1,80 @@
+1 Implement a solution for bubble sort.
+
+function bubbleSort(collection) {
+  var origValues = collection.slice();
+  var length = origValues.length - 1;
+  do {
+    var swapped = false;
+    for(var i = 0; i < length; i++){
+    if(origValues[i] > origValues[i + 1]){
+      let tmp = origValues[i];
+      origValues[i] = origValues[i + 1];
+      origValues[i + 1] = tmp;
+      swapped = true;
+    }
+   }
+  }
+  while(swapped === true);
+  return origValues
+}
+
+var newCollection = [3, 4, 1, 5, 2];
+var array1 = [4, 6, 2, 8, 9, 0, 1];
+console.log(bubbleSort(newCollection));     // returns [1, 2, 3, 4, 5]
+console.log(bubbleSort(array1));            // returns [0, 1, 2, 4, 6, 8, 9]
+
+2 Write pseudocode for quicksort.
+
+function Quicksort(array, low, high)
+  if(low < high) 
+    pivot = Partition(array, low, high)
+    Quicksort(array, low, pivot)
+    Quicksort(array, pivot + 1, high)
+
+function Partition(array, low, high)
+  pivotValue = array[low]
+  leftEnd = low
+
+  FOR i = low + 1 to high
+    if (array[i] < pivotValue)
+      swap(array[i] with array[leftEnd + 1]
+      set leftEnd to leftEnd + 1
+  END FOR
+  swap pivot with array[leftEnd]
+  return leftEnd
+
+
+
+3 We talked about time complexity in a previous checkpoint, and how to get an idea of the 
+efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, 
+identify why merge sort and quick sort are much more efficient than the others. 
+Walking through each algorithm with a few sample collections may help.
+
+A- merge sort and quicksort are both 'Divide and Conquer' algorithms, which means they work by breaking
+down problems into smaller subproblems. This means instead of iterating over a whole data set over and
+over again, they split everything into small data sets that only need to be run over once. In terms of
+time complexity, selection, bubble, and insertion sort have quadratic growth rate O(n^2), while 
+quicksort and merge sort have the better log-linear growth rate O(n log n). For a small data set or one
+that's mostly sorted to begin with, the iterative methods are probably faster but once we get to a larger
+set, the for loops nested in for loops make the iterative methods far less efficient and we should
+opt for the recursive solutions found in the Divide and Conquer algorithms.
+
+
+4 All of the sorts addressed in this checkpoint are known as comparison sorts. Research
+bucket sort and explain how it works. What is the ideal input for bucket sort?
+
+A- Bucket sort involves taking all the values in a data set and splitting them into buckets based 
+on their value. So if our data set was the numbers 1-100 in random order, we might have a bucket for 1-10, 11-20,
+21-30 etc.
+ We will go through the data set and put each value in its appropriate bucket...
+#1 [2, 4, 5, 6, 3, 7, 8, 1, 10, 9], #2[12, 14, 11, 13, 15, 17, 18, 16, 19, 20]...
+
+and then sort the values in each bucket into proper order. 
+#1 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  #2[11, 12, 13, 14, 15, 16, 17, 18, 19, 20]...
+
+Finally, we will add each bucket back together and our data will be ordered
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20...]
+
+The best input for bucket sort is data that is uniformly spread over a range, with no repeat values.
+If there are many values that are close together or repeated, they will end up in the same bucket which
+will negate the usefulness of having the buckets in the first place
