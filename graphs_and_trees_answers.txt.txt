@@ -41,21 +41,81 @@ A- Starting with the root node, for each node:
  -If the desired value is less than the root value, follow the path left to the next node.
   If we return the value, then it is in the tree. If we reach a dead end, it is not
 
-function findInTree(val) {
-  var currentNode;
-  currentNode = this.root;
-  var doesContain = false;
-  while(currentNode){                              // If we hit a dead end, the loop will end and will return false
-  if(val === currentNode.value) {
-    doesContain = true;                            // If value is found, will return true
-  } else if (val > currentNode.value) {
-    currentNode = currentNode.right                // If value is greater, will go right
-  } else if (val < currentNode.value ) {
-    currentNode = currentNode.left                 // If value is less, will go left
-  } 
-   return doesContain;
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
   }
+
+  insertNumberNode(data, left = null, right = null) {
+    let Node = {
+      data,
+      left,
+      right
+    };
+    let currentNumberNode;
+
+    if (!this.root) {
+      this.root = Node;
+    } else {
+      currentNumberNode = this.root;
+      while (currentNumberNode) {
+        if (data < currentNumberNode.data) {
+          if (!currentNumberNode.left) {
+            currentNumberNode.left = Node;
+            break;
+          } else {
+            currentNumberNode = currentNumberNode.left;
+          }
+        } else if (data > currentNumberNode.data) {
+          if (!currentNumberNode.right) {
+            currentNumberNode.right = Node;
+            break;
+          } else {
+            currentNumberNode = currentNumberNode.right;
+          }
+        } else {
+          console.log("Try Different Value");
+          break;
+        }
+      }
+    }
+  }
+   
+   findInTree(val) {                            // Function for Q1
+    let currentNumberNode = this.root;
+    while (currentNumberNode){                              // If we hit a dead end, the loop will end and will return false
+      if (currentNumberNode.data === val) {
+        return true;                            // If value is found, will return true
+      } 
+      if (val > currentNumberNode.data) {
+        currentNumberNode = currentNumberNode.right;                // If value is greater, will go right
+     } else if (val < currentNumberNode.data) {
+    currentNumberNode = currentNumberNode.left;                 // If value is less, will go left
+    } 
+   }
+   return false;
+  }
+
 }
+
+let problemOne = new BinarySearchTree();    
+problemOne.insertNumberNode(8);              // Adding the nodes to tree like the picture
+problemOne.insertNumberNode(10);
+problemOne.insertNumberNode(3);
+problemOne.insertNumberNode(6);
+problemOne.insertNumberNode(1);
+problemOne.insertNumberNode(4);
+problemOne.insertNumberNode(7);
+problemOne.insertNumberNode(14);
+problemOne.insertNumberNode(13);
+console.log(problemOne.findInTree(8));         // Tests for Q1
+console.log(problemOne.findInTree(10));
+console.log(problemOne.findInTree(23));
+
+
+
+
+
 
 2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that 
 finds the distance between the two nodes.
@@ -73,40 +133,45 @@ A - we need to figure out the node where they branch from each other (lowest com
 -Distance between 8 and 10 is 1
 
 
-function findLCA(root, node1, node2) {
-  let LCA;
-  if (root === node1 || root === node2) {
-    LCA = root;
-  }
-  var left = findLCA(root.left, node1, node2);
-  var right = findLCA(root.right, node1, node2);
-  
-  if(left && right)
-    return root;
-  else if(left)
-    return left;
-  else
-  return right;
+ //Function for Q2
+  findLCA(root, node1, node2) {
+    if(!root) return;
+    let LCA = root.data;
+    if (LCA === node1 || LCA === node2) {
+      return LCA;
+    }
+    if (node1 < LCA && node2 < LCA) {
+      return this.findLCA(root.left, node1, node2);
+    }
+    if (node1 > LCA && node2 > LCA) {
+      return this.findLCA(root.right, node1, node2);
+    }
+    return LCA;
 }
 
-function findDepth(currentNode, targetNode){
-  let depth = 0;
-  if(currentNode == targetNode){
-    return depth;
-  } else if (currentNode.value < targetNode.value){
-    currentNode = currentNode.left;
-    depth ++;
-  } else if(currentNode.value > targetNode.value){
-    currentNode = currentNode.right;
-    depth ++;
+ findDepth(root, targetNode) {
+    let thisNode = this.root;
+    let depth = 0;
+    while (thisNode) {
+      if (targetNode === thisNode.data) {
+        return depth;
+      }
+      thisNode = targetNode < thisNode.data ? thisNode.left : thisNode.right;
+      depth++;
+    }
   }
-}
-    
 
-function findDistance(root, node1, node2){
-  var LCA = LCA(root, node1, node2);
-  var depthNode1 = findDepth(LCA, node1);
-  var depthNode2 = findDepth(LCA, node2);
+findDistance(root, node1, node2){
+  var LCA = this.findLCA(root, node1, node2);
+  var depthNode1 = this.findDepth(LCA, node1);
+  var depthNode2 = this.findDepth(LCA, node2);
   var distanceBetween = depthNode1 + depthNode2;
-}
+  return distanceBetween;
+ }
+
+
+
+console.log(problemOne.findDistance(problemOne.root, 8, 10)); //Tests for Q2
+console.log(problemOne.findDistance(problemOne.root, 1, 14));
+
 
